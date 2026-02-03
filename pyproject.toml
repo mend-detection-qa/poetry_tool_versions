@@ -6,13 +6,13 @@ authors = ["Test <test@example.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-# CRITICAL: These package versions REQUIRE Python >=3.9/3.10/3.11
-# They CANNOT be installed with Python 3.8 - installation will fail
-# Combined with vulnerabilities, wrong Python detection = missed vulnerabilities
-numpy = {version = "==1.26.0", markers = "python_version >= '3.9'"}  # Requires Python >=3.9, won't work with 3.8
-pillow = {version = "==9.3.0", markers = "python_version >= '3.11'"}  # CVE-2023-50447 - Arbitrary code execution
-GitPython = {version = "==3.1.30", markers = "python_version >= '3.11'"}  # CVE-2023-40267 - Remote code execution
-aiohttp = {version = "==3.8.5", markers = "python_version >= '3.11'"}  # CVE-2024-23334 - Directory traversal
+# CRITICAL: These package versions have VULNERABILITIES and require Python >=3.9 or >=3.11
+# numpy 1.26.x genuinely dropped Python 3.8 support
+# Other packages use markers to simulate version-specific dependency resolution
+numpy = {version = "==1.26.0", markers = "python_version >= '3.9'"}  # Requires Python >=3.9 (REAL incompatibility with 3.8)
+pillow = {version = "==10.0.0", markers = "python_version >= '3.11'"}  # CVE-2023-50447 - Pillow 10.x requires Python >=3.8, but we restrict to 3.11 via marker
+cryptography = {version = "==41.0.0", markers = "python_version >= '3.11'"}  # CVE-2023-49083 - NULL pointer dereference
+httpx = {version = "==0.23.0", markers = "python_version >= '3.11'"}  # CVE-2023-37276 - Improper handling of redirects
 
 [build-system]
 requires = ["poetry-core"]
