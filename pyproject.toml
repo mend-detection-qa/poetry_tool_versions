@@ -7,10 +7,10 @@ authors = ["Test <test@example.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 # CRITICAL: These package versions have VULNERABILITIES and require Python >=3.9 or >=3.11
-tornado = "==6.4"  
-starlette = "==0.32.0"
-fastapi = "==0.109.0"
-werkzeug = "==3.0.0" 
+tornado = "6.2" 
+pillow = "9.3.0" 
+werkzeug = "2.2.2"  
+urllib3 = "1.26.5"  
 
 [build-system]
 requires = ["poetry-core"]
